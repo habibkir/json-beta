@@ -1,0 +1,6 @@
+[31m[1mCMake Error[0m at /home/troia/Ros/json-beta/src/respond/CMakeLists.txt:30 (set_target_properties):
+  set_target_properties called with illegal arguments, maybe missing a
+  PROPERTIES specifier?
+
+
+make: *** [Makefile:574: cmake_check_build_system] Error 1

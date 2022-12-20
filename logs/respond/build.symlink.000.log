@@ -1,0 +1,4 @@
+Symlinking /home/troia/Ros/json-beta/devel/lib/pkgconfig/respond.pc
+Symlinking /home/troia/Ros/json-beta/devel/lib/respond/respond_node
+Symlinking /home/troia/Ros/json-beta/devel/share/respond/cmake/respondConfig.cmake
+Symlinking /home/troia/Ros/json-beta/devel/share/respond/cmake/respondConfig-version.cmake

@@ -1,0 +1,1 @@
+/home/troia/Ros/json-beta/devel/.private/signaler/share/signaler/cmake/signalerConfig-version.cmake

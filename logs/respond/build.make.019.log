@@ -1,0 +1,8 @@
+[35m[1mScanning dependencies of target respond_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/respond_node.dir/main.cpp.o[0m
+[01m[K/home/troia/Ros/json-beta/src/respond/main.cpp:120:28:[m[K [01;31m[Kerror: [m[K‘[01m[Klog_file_name[m[K’ was not declared in this scope
+  120 | Logger* log4j = new Logger([01;31m[Klog_file_name[m[K());
+      |                            [01;31m[K^~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/respond_node.dir/build.make:63: CMakeFiles/respond_node.dir/main.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:155: CMakeFiles/respond_node.dir/all] Error 2
+make: *** [Makefile:141: all] Error 2
