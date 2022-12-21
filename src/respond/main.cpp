@@ -1,6 +1,10 @@
 #include<iostream>
 #include<fstream> // per leggere i file json
 
+#include<sstream> // per stampare sta cazzo di data
+#include<ctime>
+#include<iomanip>
+
 #include<algorithm> // per std::replace
 
 #include<boost/function.hpp>
@@ -11,35 +15,32 @@
 #include "include/json.hpp"
 using json = nlohmann::json;
 
-
+// l'implementazione corrente è di un inefficiente spaventoso
+// si veda poi come farla decente
+class Time_formatter {
+public:
+    static std::string curr_time_str() {
+	auto t = std::time(nullptr);
+	auto tm = *(std::localtime(&t));
+	std::stringstream ss;
+	ss<<std::put_time(&tm, "%d-%m-%Y-%H_%M_%S");
+	return ss.str();
+    }
+};
 
 class Logger {
 public:
-    Logger () {
-	ofs = new std::ofstream(log_file_name());
+    Logger() {
+	ofs = new std::ofstream("logs/" + Time_formatter::curr_time_str() + "-err.log");
     }
-    void log(std::string& msg) {
-	(*ofs)<<msg<<" time : "<<curr_time_c_str();
+    void log(std::string msg) {
+	(*ofs)<<msg<<", tempo : " + Time_formatter::curr_time_str()<<std::endl;
     }
-
     ~Logger() {
-	delete ofs;
+	ofs->close();
     }
 private:
-    time_t _time = time(NULL);
-    struct curr_time * curtime;
     std::ofstream* ofs;
-    std::string log_file_name() {
-	std::string date = std::string(curr_time_c_str());
-	// evitimao di farci uccidere da qualche filesystem
-	std::replace(date.begin(), date.end(), ' ', '-');
-	std::replace(date.begin(), date.end(), ':', '_');
-
-	return "log-files/" + date + "-errors.log";
-    }
-    char* curr_time_c_str() {
-	return asctime(localtime(&_time));
-    }
 };
 
 class Responder {
