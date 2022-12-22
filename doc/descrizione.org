@@ -1,0 +1,69 @@
+per leggere questo file in locale, visto che il plaintext ha un pessimo aspetto, c'è la
+plugin apposta di vscode, se vuoi, altrimenti github dovrebbe renderlo abbastanza bene
+https://vscode-org-mode.github.io/vscode-org-mode/
+
+* Obbiettivi
+** Funzionali
+*** Gestione errori
+L'obbiettivo è definire il comportamento dell'error handler con un file json
+
+il comportamento dell'error handler è definito come
+"in risposta a errore <tot> che faccio?" per ogni errore che si può ricevere.
+
+*** Logger
+Il logger dovrà salvare su un file di log le seguenti informazioni sugli errori ricevuti
+dall'error handler
+ - che è successo
+ - quando è successo
+   
+il file di log dovrà inoltre contenere nel titolo la data e ora della sua creazione, ai
+fini di rendere più facile capire quando e come è andato tutto in malora, e su quale log
+cercare che cazzo è successo
+
+** Strutturali
+magari rendi sta cosa un pochino modulare visto che dovrà essere cambiata parecchie volte
+
+* Implementazione
+** Gestione errori
+Per definire "in rispota all'errore <tot> che faccio?" si associa a ogni errore
+<tot> una qualche funzione.
+Per definire l'associazione tra errore e funzione nel json dobbiamo rappresentare (o
+perlomeno indicare) nel json
+ - l'errore
+ - la funzione
+ - visto che li mettiamo nello stesso "record" del json l'associazione viene gratis
+
+l'errore sarà rappresentato tramite un suo id, nel nostro caso l'id in questione è una
+stringa, tanto questa parte di logica sono cazzi del design del programma quindi
+abbastanza /language agnostic/[fn::sentitevi liberi, se non obbligati a leggere ogni
+frase in inglese dentro questo documento come se foste il Vicario]
+
+il problema è come rappresentare una funzione c++ dentro il json, visto che la funzione è
+bene o male un puntatore a un pezzo di codice macchina, mentre il json è il json.
+Questo si risolve associando a ogni funzione c++ che si può voler chiamare un qualche id
+univoco rappresentabile in json, in questo caso una stringa, l'associazione tra
+una stringa e funzione può essere facilmente realizzata con una map, che in c++ si fa
+gratis con un =std::map<>= o una =std::unordered_map<>=, fatto questo si potrà inserire
+l'id/stringa associato alla funzione all'interno del json per riferirci alla funzione c++
+tramite questa mappa.
+
+*** Le due mappe identiche
+questa realizzazione richiede quindi l'utilizzo di due mappe =string <-> function=
+ - dall'id della funzione alla funzione associata (per indicare la funzione dal json)
+ - dall'id dell'errore alla funzione associata (per associarla all'errore dal json)
+
+da qui spero che il codice per la classe =Responder= possa spiegare il resto, anche se è
+scritto un po' alla cazzo di cane
+   
+*** Problemi con quest'implementazione
+parecchi
+
+** Logger
+visto che il logger non deve fare molto oltre allo scrivere roba su un file, è bene o male
+un wrapper per una ofstream, con qualche funzioncina per scrivere le date, che ho copiato
+malamanete da stackoverflow visto che non ho idea di come dovrebbe funzionare il tempo in
+c++, so solo che è un puttanaio, e che al momento non è un mio problema capirlo.
+
+* Struttura
+la seguente sezione sarà popolata quando mi deciderò a fare il dovuto refactoring di
+questo puttanaio
