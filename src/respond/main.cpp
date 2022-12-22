@@ -31,7 +31,7 @@ public:
 class Logger {
 public:
     Logger() {
-	ofs = new std::ofstream("logs/" + Time_formatter::curr_time_str() + "-err.log");
+	ofs = new std::ofstream("log-files/" + Time_formatter::curr_time_str() + "-errors.log");
     }
     void log(std::string msg) {
 	(*ofs)<<msg<<", tempo : " + Time_formatter::curr_time_str()<<std::endl;
