@@ -12,8 +12,13 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
-#include "include/json.hpp"
+#include "include/json/json.hpp"
 using json = nlohmann::json;
+
+#include "include/responders/controls_responder.hpp"
+#include "include/responders/yolo_responder.hpp"
+#include "include/responders/slam_responder.hpp"
+#include "include/responders/traj_responder.hpp"
 
 // l'implementazione corrente è di un inefficiente spaventoso
 // si veda poi come farla decente
@@ -43,61 +48,64 @@ private:
     std::ofstream* ofs;
 };
 
-class Responder {
-public:
-    void respond_to(std::string err_id) {
-	(azioni[err_id])(this);
-    }
-    void follow_json(json j) {
-	for(json error : j["errors"]) {
-	    bind(error["id"], error["fun id"]);
-	}
-    }
-    void bind(std::string err_id, std::string fun_id) {
-	azioni[err_id] = funzioni[fun_id];
-    }
-private:
-    void onTrackLost() {
-	std::cout<<"non ci vedo"<<std::endl;
-    }
-    void onCameraFucked() {
-	std::cout<<"pessimo modo per non vederci"<<std::endl;
-    }
-    void onControlsFucked() {
-	std::cout<<"non riesco a muovermi molto bene"<<std::endl;
-    }
-
-    void haltAndCatchFire() {
-	std::cout<<"GAME OVER YEEEEEEEAAAAAAH!!!!!!"<<std::endl;
-    }
-
-    void haltAndLinkTheFire () {
-	std::cout<<"plin plin plon, plin plin plin, plin plon"<<std::endl;
-    }
-    /*
-     * il campo function del json si riferisce
-     * a quanto indicato in questa mappa
-     * il (Responder*) nella signature messa nel template
-     * è per il puntatore this
-     * che è sempre implicitamente passato come parametro
-     * a tutti i metodi di una classe
-     */
-    std::map<std::string, boost::function<void(Responder*)>> funzioni =
-	{{"onTrackLost", &Responder::onTrackLost},
-	 {"onCameraFucked", &Responder::onCameraFucked},
-	 {"onControlsFucked", &Responder::onControlsFucked},
-	 {"haltAndCatchFire", &Responder::haltAndCatchFire},
-	 {"haltAndLinkTheFire", &Responder::haltAndLinkTheFire}};
-
-    /*
-     * Responder::bind() associerà l'id alla funzione in questa mappa
-     * in modo da poter cambiare in modo più flessibile
-     * il funzionamento dell'error handler
-     * attraverso, per l'appunto, questa mappa
-     * (che sarà quella da cui si chiamano le funzioni nel respond_to)
-     */
-    std::map<std::string, boost::function<void(Responder*)>> azioni;
-};
+// class Responder {
+// public:
+//     void respond_to(std::string err_id) {
+// 	(azioni[err_id])(this);
+//     }
+//     void follow_json(json j) {
+// 	for(json error : j["errors"]) {
+// 	    bind(error["id"], error["fun id"]);
+// 	}
+//     }
+//     void bind(std::string err_id, std::string fun_id) {
+// 	azioni[err_id] = funzioni[fun_id];
+//     }
+// private:
+//     void onTrackLost() {
+// 	std::cout<<"non ci vedo"<<std::endl;
+//     }
+//     void onCameraFucked() {
+// 	std::cout<<"pessimo modo per non vederci"<<std::endl;
+//     }
+//     void onControlsFucked() {
+// 	std::cout<<"non riesco a muovermi molto bene"<<std::endl;
+//     }
+// 
+//     void haltAndCatchFire() {
+// 	std::cout<<"GAME OVER YEEEEEEEAAAAAAH!!!!!!"<<std::endl;
+//     }
+// 
+//     void haltAndLinkTheFire () {
+// 	std::cout<<"plin plin plon, plin plin plin, plin plon"<<std::endl;
+//     }
+//     /*
+//      * il campo function del json si riferisce
+//      * a quanto indicato in questa mappa
+//      * il (Responder*) nella signature messa nel template
+//      * è per il puntatore this
+//      * che è sempre implicitamente passato come parametro
+//      * a tutti i metodi di una classe
+//      */
+//     // <fun id> del json <-> funzione
+//     std::map<std::string, boost::function<void(Responder*)>> funzioni =
+// 	{{"onTrackLost", &Responder::onTrackLost},
+// 	 {"onCameraFucked", &Responder::onCameraFucked},
+// 	 {"onControlsFucked", &Responder::onControlsFucked},
+// 	 {"haltAndCatchFire", &Responder::haltAndCatchFire},
+// 	 {"haltAndLinkTheFire", &Responder::haltAndLinkTheFire}};
+// 
+//     /*
+//      * Responder::bind() associerà l'id alla funzione in questa mappa
+//      * in modo da poter cambiare in modo più flessibile
+//      * il funzionamento dell'error handler
+//      * attraverso, per l'appunto, questa mappa
+//      * (che sarà quella da cui si chiamano le funzioni nel respond_to)
+//      */
+//     // <error id> nel json <-> funzione
+//     std::map<std::string, boost::function<void(Responder*)>> azioni;
+//     // azioni[id] = azione che verrà fatta quando si riceve id
+// };
 
 /*
  * da
@@ -118,22 +126,22 @@ private:
 
 // variabili globali, peccato contro l'umanità et al
 // trova il modo di toglierle
-Logger* log4j = new Logger();
-Responder* r = new Responder();
+
+Logger* logger = new Logger();
+Traj_responder* t = new Traj_responder();
 
 void error_callback(const std_msgs::String::ConstPtr& msg) {
     std::string str = msg->data;
-    log4j->log(str);
-    r->respond_to(str);
+    logger->log(str);
+    t->respond_to(str);
 }
 
 int main(int argc, char** argv) {
     ros::init(argc, argv, "respond");
     ros::NodeHandle nh;
 
-    std::ifstream ifs("error-files/errors.json");
-    json j = json::parse(ifs);
-    r->follow_json(j);
+    std::ifstream ifs = std::ifstream
+	("src/respond/error-files/traj_errors.json");
 
     ros::Subscriber error_sub = nh.subscribe("errori", 100, error_callback);
 
