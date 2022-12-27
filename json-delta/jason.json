@@ -1,0 +1,14 @@
+{
+    "errors" :
+    [
+	{
+	    "id" : "cazzo",
+	    "fun id" : "la mamma"
+	},
+
+	{
+	    "id" : "aiuto",
+	    "fun id" : "cogito ergo"
+	}
+    ]
+}
