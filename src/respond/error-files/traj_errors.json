@@ -2,32 +2,23 @@
     "errors" : [
 	{
 	    "id" : "track lost",
-	    "desc" : "track is lost",
 	    "fun id" : "onTrackLost"
 	},
-
 	{
 	    "id" : "camera fucked",
-	    "fun id" : "onCameraFucked",
-	    "desc" : "camera is fucked"
+	    "fun id" :"onCameraFucked"
 	},
-
 	{
 	    "id" : "controls fucked",
-	    "fun id" : "onControlsFucked",
-	    "desc" : "controls are fucked"
+	    "fun id" :"onControlsFucked"
 	},
-
 	{
 	    "id" : "everything fucked",
-	    "fun id" : "haltAndCatchFire",
-	    "desc" : "people are strange when you're a stranger"
+	    "fun id" :"haltAndCatchFire"
 	},
-
-	{
+	{   
 	    "id" : "fire fucked",
-	    "fun id" : "haltAndLinkTheFire",
-	    "desc" : "soon the flames will fade, and only dark will remain"
+	    "fun id" :"haltAndLinkTheFire"
 	}
     ]
 }

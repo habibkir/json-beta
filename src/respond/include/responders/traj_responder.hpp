@@ -34,7 +34,7 @@ private:
 	new Responder_base <Traj_responder>
 	({{"onTrackLost", &Traj_responder::test},
 	  {"onCameraFucked", &Traj_responder::test},
-	  {"onTrajFucked", &Traj_responder::test},
+	  {"onControlsFucked", &Traj_responder::test},
 	  {"haltAndCatchFire", &Traj_responder::test},
 	  {"haltAndLinkTheFire", &Traj_responder::test}});
 

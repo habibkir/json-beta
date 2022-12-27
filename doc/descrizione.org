@@ -2,7 +2,7 @@ per leggere questo file in locale, visto che il plaintext ha un pessimo aspetto,
 plugin apposta di vscode, se vuoi, altrimenti github dovrebbe renderlo abbastanza bene
 https://vscode-org-mode.github.io/vscode-org-mode/
 
-* Obbiettivi
+* Obbiettivi sum, nihil obbettivi a me alieno puto
 ** Funzionali
 *** Gestione errori
 L'obbiettivo è definire il comportamento dell'error handler con un file json
