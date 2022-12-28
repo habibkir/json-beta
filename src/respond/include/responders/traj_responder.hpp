@@ -17,10 +17,23 @@ public:
     Traj_responder(std::string s) {
 	// metti err2call nel responder
 	std::ifstream ifs = std::ifstream(s);
+
+	//
+	std::string str;
+	std::cout<<"==== BEGIN PGP KEY ===="<<std::endl;
+	while(std::getline(ifs, str)) {
+	    std::cout<<str<<std::endl;
+	}
+	std::cout<<"===== END PGP KEY ====="<<std::endl;
+	ifs.close();
+	ifs.open(s);
+	//
+
 	json j = json::parse(ifs);
 	r->follow_json(j);
     }
     void respond_to(std::string err_id) {
+	std::cout<<"Traj_error responding to "<<err_id<<std::endl;
 	r->respond_to(err_id);
     }
     void bind(std::string err_id, std::string fun_id) {

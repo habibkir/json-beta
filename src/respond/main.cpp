@@ -69,8 +69,7 @@ private:
 // trova il modo di toglierle
 
 Logger* logger = new Logger();
-Traj_responder* t = new Traj_responder
-	("src/respond/error-files/traj_errors.json");
+Traj_responder* t;
 
 void error_callback(const std_msgs::String::ConstPtr& msg) {
     std::string str = msg->data;
@@ -82,7 +81,39 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "respond");
     ros::NodeHandle nh;
 
-    ros::Subscriber error_sub = nh.subscribe("errori", 100, error_callback);
+    std::string err;
+    if(nh.getParam("/respond_node/error_topic", err)) {
+	std::cout<<"l'error topic del responder è il seguente"<<std::endl;
+	std::cout<<err<<std::endl;
+    }
+    else {
+	std::cout<<"error_topic non s'ha da fare"<<std::endl;
+    }
+
+    std::string err_json;
+    if(nh.getParam("/respond_node/error_json", err_json)) {
+	std::cout<<"l'error json del responder è il seguente"<<std::endl;
+	std::cout<<err_json<<std::endl;
+    }
+    else {
+	std::cout<<"error_json non s'ha da fare"<<std::endl;
+    }
+
+    std::vector<std::string> params;
+    nh.getParamNames(params);
+    for(auto a : params) {
+	std::cout<<a<<" : ";
+	std::string param_val;
+	nh.getParam(a,param_val);
+	std::cout<<param_val<<std::endl;
+    }
+
+    t = new Traj_responder(err_json);
+    std::cout<<"begin quindi"<<std::endl;
+    std::cout<<err<<std::endl;
+    std::cout<<err_json<<std::endl;
+    std::cout<<"end quindi"<<std::endl;
+    ros::Subscriber error_sub = nh.subscribe(err, 100, error_callback);
 
     ros::spin();
 
