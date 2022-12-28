@@ -73,8 +73,11 @@ Traj_responder* t;
 
 void error_callback(const std_msgs::String::ConstPtr& msg) {
     std::string str = msg->data;
+    std::cout<<"begin error_callback"<<std::endl;
+    std::cout<<str<<std::endl;
     logger->log(str);
     t->respond_to(str);
+    std::cout<<"end error_callback"<<std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -110,8 +113,8 @@ int main(int argc, char** argv) {
 
     t = new Traj_responder(err_json);
     std::cout<<"begin quindi"<<std::endl;
-    std::cout<<err<<std::endl;
-    std::cout<<err_json<<std::endl;
+    std::cout<<"error topic "<<err<<std::endl;
+    std::cout<<"error json "<<err_json<<std::endl;
     std::cout<<"end quindi"<<std::endl;
     ros::Subscriber error_sub = nh.subscribe(err, 100, error_callback);
 

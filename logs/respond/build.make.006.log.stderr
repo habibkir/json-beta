@@ -1,7 +1,0 @@
-[01m[K/home/troia/Ros/json-beta/src/respond/main.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
-[01m[K/home/troia/Ros/json-beta/src/respond/main.cpp:69:21:[m[K [01;31m[Kerror: [m[K‘[01m[Kstd::filesystem[m[K’ has not been declared
-   69 |     std::cout<<std::[01;31m[Kfilesystem[m[K::current_path()<<std::endl;
-      |                     [01;31m[K^~~~~~~~~~[m[K
-make[2]: *** [CMakeFiles/respond_node.dir/build.make:63: CMakeFiles/respond_node.dir/main.cpp.o] Error 1
-make[1]: *** [CMakeFiles/Makefile2:155: CMakeFiles/respond_node.dir/all] Error 2
-make: *** [Makefile:141: all] Error 2

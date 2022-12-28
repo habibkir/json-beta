@@ -9,7 +9,8 @@ int main(int argc, char** argv) {
     ros::NodeHandle nh;
 
     std::string err;
-    nh.getParam("error_topic", err);
+    // al momento le path del launch sono assolutamente orrende
+    nh.getParam("/signaler_node/error_topic", err);
     ros::Publisher error_pub = nh.advertise<std_msgs::String>(err, 100);
     ros::Rate hertz_sleeper(10);
 

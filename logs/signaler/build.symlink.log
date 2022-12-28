@@ -1,4 +1,4 @@
-Linked: (/home/troia/Ros/json-beta/devel/.private/signaler/lib/pkgconfig/signaler.pc, /home/troia/Ros/json-beta/devel/lib/pkgconfig/signaler.pc)
-Linked: (/home/troia/Ros/json-beta/devel/.private/signaler/lib/signaler/signaler_node, /home/troia/Ros/json-beta/devel/lib/signaler/signaler_node)
-Linked: (/home/troia/Ros/json-beta/devel/.private/signaler/share/signaler/cmake/signalerConfig-version.cmake, /home/troia/Ros/json-beta/devel/share/signaler/cmake/signalerConfig-version.cmake)
-Linked: (/home/troia/Ros/json-beta/devel/.private/signaler/share/signaler/cmake/signalerConfig.cmake, /home/troia/Ros/json-beta/devel/share/signaler/cmake/signalerConfig.cmake)
+Symlinking /home/troia/Ros/json-beta/devel/lib/pkgconfig/signaler.pc
+Symlinking /home/troia/Ros/json-beta/devel/lib/signaler/signaler_node
+Symlinking /home/troia/Ros/json-beta/devel/share/signaler/cmake/signalerConfig-version.cmake
+Symlinking /home/troia/Ros/json-beta/devel/share/signaler/cmake/signalerConfig.cmake

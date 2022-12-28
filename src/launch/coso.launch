@@ -7,20 +7,14 @@
      <!-- <arg name="output_topic"                default="/trajectory/points"/> -->
     
     <!-- Node -->
-    <node name="signaler_node"
-	  pkg="signaler"
-	  type="signaler_node"
-	  output="screen"
-	  respawn="true">
+    <node name="signaler_node" pkg="signaler"
+	  type="signaler_node" output="screen" respawn="true">
         <param name="error_topic"  type="string"  value="$(arg error_topic)"/>
          <!-- <param name="output_topic"          value="$(arg output_topic)"/> -->
     </node>
 
-    <node name="respond_node"
-	  pkg="respond"
-	  type="respond_node"
-	  output="screen"
-	  respawn="true">
+    <node name="respond_node" pkg="respond"
+	  type="respond_node" output="screen" respawn="true">
         <param name="error_topic" type="string"   value="$(arg error_topic)"/>
 	<param name="error_json"  type="string"   value="$(find respond)/error-files/traj_errors.json"/>
          <!-- <param name="output_topic"          value="$(arg output_topic)"/> -->

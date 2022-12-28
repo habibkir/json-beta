@@ -1,0 +1,6 @@
+devel_space: /home/troia/Ros/json-beta/devel
+install: false
+install_space: /home/troia/Ros/json-beta/install
+profile: default
+source_space: /home/troia/Ros/json-beta/src
+workspace: /home/troia/Ros/json-beta

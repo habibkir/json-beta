@@ -34,17 +34,5 @@ Not searching for unused variables given on the command line.
 [36m--[0m catkin 0.8.10
 [36m--[0m BUILD_SHARED_LIBS is on
 [36m--[0m Configuring done
-[31m[1mCMake Error[0m at /home/troia/Ros/json-beta/src/respond/CMakeLists.txt:24 (add_executable):
-  Cannot find source file:
-
-    src/handler.cpp
-
-  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
-  .hpp .hxx .in .txx
-
-
-[31m[1mCMake Error[0m at /home/troia/Ros/json-beta/src/respond/CMakeLists.txt:24 (add_executable):
-  No SOURCES given to target: respond_node
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+[36m--[0m Generating done
+[36m--[0m Build files have been written to: /home/troia/Ros/json-beta/build/respond
