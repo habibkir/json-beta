@@ -35,17 +35,27 @@ public:
 
 class Logger {
 public:
-    Logger() {
-	ofs = new std::ofstream("log-files/" + Time_formatter::curr_time_str() + "-errors.log");
+    Logger(std::string base_dir) {
+	std::string s =
+	    base_dir + "/"
+	    + Time_formatter::curr_time_str()
+	    + "-errors.log";
+
+	std::cout<<"begin nome del file del logger"<<std::endl;
+	std::cout<<s<<std::endl;
+	std::cout<<"end nome del file del logger"<<std::endl;
+	ofs = std::ofstream(s);
     }
     void log(std::string msg) {
-	(*ofs)<<msg<<", tempo : " + Time_formatter::curr_time_str()<<std::endl;
+	std::cout<<"logging "<<msg<<std::endl;
+	ofs<<msg<<", tempo : " + Time_formatter::curr_time_str()<<std::endl;
+	// std::endl dovrebbe fare il flush, quindi se non si vede il file non so che dovrebbe voler dire
     }
     ~Logger() {
-	ofs->close();
+	ofs.close();
     }
 private:
-    std::ofstream* ofs;
+    std::ofstream ofs;
 };
 
 /*
@@ -68,7 +78,7 @@ private:
 // variabili globali, peccato contro l'umanità et al
 // trova il modo di toglierle
 
-Logger* logger = new Logger();
+Logger* logger;
 Traj_responder* t;
 
 void error_callback(const std_msgs::String::ConstPtr& msg) {
@@ -83,6 +93,11 @@ void error_callback(const std_msgs::String::ConstPtr& msg) {
 int main(int argc, char** argv) {
     ros::init(argc, argv, "respond");
     ros::NodeHandle nh;
+
+    std::string logs_dir;
+    nh.getParam("/respond_node/logs_dir", logs_dir);
+    std::cout<<logs_dir<<std::endl;
+    logger = new Logger(logs_dir);
 
     std::string err;
     if(nh.getParam("/respond_node/error_topic", err)) {
