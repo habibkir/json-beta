@@ -9,7 +9,13 @@
 #include "../json/json.hpp"
 using json = nlohmann::json;
 
-#include "Responder_base.hpp" // and redpilled
+#include "Responder_base.hpp" 
+
+namespace traj{ 
+	void test(){
+	std::cout<<"Cogito ergo segfault(core dumped)"<<std::endl;
+	};
+}
 
 class Traj_responder {
 public:
@@ -17,17 +23,6 @@ public:
     Traj_responder(std::string s) {
 	// metti err2call nel responder
 	std::ifstream ifs = std::ifstream(s);
-
-	//
-	std::string str;
-	std::cout<<"==== BEGIN PGP KEY ===="<<std::endl;
-	while(std::getline(ifs, str)) {
-	    std::cout<<str<<std::endl;
-	}
-	std::cout<<"===== END PGP KEY ====="<<std::endl;
-	ifs.close();
-	ifs.open(s);
-	//
 
 	json j = json::parse(ifs);
 	r->follow_json(j);
@@ -43,17 +38,13 @@ public:
 	delete r;
     }
 private:
-    Responder_base <Traj_responder>* r =
-	new Responder_base <Traj_responder>
-	({{"onTrackLost", &Traj_responder::test},
-	  {"onCameraFucked", &Traj_responder::test},
-	  {"onControlsFucked", &Traj_responder::test},
-	  {"haltAndCatchFire", &Traj_responder::test},
-	  {"haltAndLinkTheFire", &Traj_responder::test}});
-
-    void test() {
-	std::cout<<"Cogito ergo segfault(core dumped)"<<std::endl;
-    }
+    Responder_base * r =
+	new Responder_base
+	({{"onTrackLost", &traj::test},
+	  {"onCameraFucked", &traj::test},
+	  {"onControlsFucked", &traj::test},
+	  {"haltAndCatchFire", &traj::test},
+	  {"haltAndLinkTheFire", &traj::test}});
 };
 
 #endif

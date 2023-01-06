@@ -1,8 +1,0 @@
- - sistemato
-
- - smistarlo in 4/smista err files, fatto
-   - object oriented
- - file launch
- - write the docs
- - variabili globali (estetica)
-   

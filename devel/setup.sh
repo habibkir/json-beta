@@ -1,0 +1,1 @@
+/home/alessandro/err/json-beta/devel/.private/catkin_tools_prebuild/setup.sh

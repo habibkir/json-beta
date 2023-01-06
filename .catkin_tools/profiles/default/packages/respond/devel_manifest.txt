@@ -1,0 +1,6 @@
+respond
+/home/alessandro/err/json-beta/devel/.private/respond/cmake.lock /home/alessandro/err/json-beta/devel/./cmake.lock
+/home/alessandro/err/json-beta/devel/.private/respond/share/respond/cmake/respondConfig.cmake /home/alessandro/err/json-beta/devel/share/respond/cmake/respondConfig.cmake
+/home/alessandro/err/json-beta/devel/.private/respond/share/respond/cmake/respondConfig-version.cmake /home/alessandro/err/json-beta/devel/share/respond/cmake/respondConfig-version.cmake
+/home/alessandro/err/json-beta/devel/.private/respond/lib/pkgconfig/respond.pc /home/alessandro/err/json-beta/devel/lib/pkgconfig/respond.pc
+/home/alessandro/err/json-beta/devel/.private/respond/lib/respond/respond_node /home/alessandro/err/json-beta/devel/lib/respond/respond_node

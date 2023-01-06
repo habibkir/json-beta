@@ -1,0 +1,6 @@
+signaler
+/home/alessandro/err/json-beta/devel/.private/signaler/cmake.lock /home/alessandro/err/json-beta/devel/./cmake.lock
+/home/alessandro/err/json-beta/devel/.private/signaler/share/signaler/cmake/signalerConfig.cmake /home/alessandro/err/json-beta/devel/share/signaler/cmake/signalerConfig.cmake
+/home/alessandro/err/json-beta/devel/.private/signaler/share/signaler/cmake/signalerConfig-version.cmake /home/alessandro/err/json-beta/devel/share/signaler/cmake/signalerConfig-version.cmake
+/home/alessandro/err/json-beta/devel/.private/signaler/lib/signaler/signaler_node /home/alessandro/err/json-beta/devel/lib/signaler/signaler_node
+/home/alessandro/err/json-beta/devel/.private/signaler/lib/pkgconfig/signaler.pc /home/alessandro/err/json-beta/devel/lib/pkgconfig/signaler.pc

@@ -1,0 +1,4 @@
+[35m[1mScanning dependencies of target respond_node[0m
+[ 50%] [32mBuilding CXX object CMakeFiles/respond_node.dir/main.cpp.o[0m
+[100%] [32m[1mLinking CXX executable /home/alessandro/err/json-beta/devel/.private/respond/lib/respond/respond_node[0m
+[100%] Built target respond_node
