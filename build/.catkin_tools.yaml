@@ -1,6 +1,0 @@
-devel_space: /home/alessandro/err/json-beta/devel
-install: false
-install_space: /home/alessandro/err/json-beta/install
-profile: default
-source_space: /home/alessandro/err/json-beta/src
-workspace: /home/alessandro/err/json-beta
