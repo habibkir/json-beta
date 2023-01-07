@@ -6,13 +6,13 @@ la gestione degli errori è implementata attraverso classi ```Responder_base```,
  - ```Traj_responder``` per gli errori di trajectory
  - e basta
 
-per i concetti generali nel prgetto vedere [concetti](##concetti)
+per i concetti generali nel prgetto vedere [concetti](#concetti)
  
-per l'integrazione dell'error handler con altri nodi ros vedere [integrazione](##integrazione)
+per l'integrazione dell'error handler con altri nodi ros vedere [integrazione](#integrazione)
 
-per la scrittura e modifica di file json di configurazoine vedere [configurazione](##configurazione)
+per la scrittura e modifica di file json di configurazoine vedere [configurazione](#configurazione)
 
-per l'utilizzo delle classi presenti nel nodo responder vedere [metodi](##metodi)
+per l'utilizzo delle classi presenti nel nodo responder vedere [metodi](#metodi)
 
 ## Concetti
 
@@ -57,5 +57,5 @@ sono al momento presenti file di esempio nella cartella ```src/responder/error-f
 i responder non base presentano i seguenti metodi
  - ```<costruttore>(std::string file_path)``` crea il responder e associa gli errori ai callback invocando ```follow_json``` sul json trovato nella path data al costruttore, la path, qualora fosse relativa viene valutata a partire dalla directory base del workspace catkin in cui si trova il package
  - ```respond_to(std::string err_id)``` esegue il callback che è stato precedentemente associato all'errore identificato con id ```err_id```
- - ```follow_json(json j)``` chiama ```bind``` sugli id di funzione ed errore indicati nel membro "errors" del json passato (prevede la struttura citata in [configurazione](##configurazione)
+ - ```follow_json(json j)``` chiama ```bind``` sugli id di funzione ed errore indicati nel membro "errors" del json passato (prevede la struttura citata in [configurazione](#configurazione)
  - ```bind(std::string err_id, std::string fun_id)``` associa l'errore con id ```err_id``` con la funzione con id ```fun_id```
